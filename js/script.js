@@ -1,12 +1,10 @@
 'use strict';
 $(function(){	
-	
-    var mainObj = [
-    
+	var html = $('#parsed-resig').html();
+    var mainObj = [    
         {
         headerTest: 'Проверь свои знания JavaScript'
-        },
-        
+        },        
         {
         	question: 'JavaScript это',
         	blockAnswer: ['Объектно-ориентированный скриптовый язык программирования',
@@ -25,34 +23,47 @@ $(function(){
         },
         { 
             question: 'Какой из этих тагов соответствуют стандарту HTML?',
-            blockAnswer: ['<script language="javascript" type="text/javascript"',
-                          '<script>',
-                          '<script language="javascript">',
-                          '<script type="text/javascript">'],
+            blockAnswer: ['&lt;"script language="javascript" type="text/javascript"&gt;',
+                          '&lt;script&gt;',
+                          '&lt;script language="javascript"&gt;',
+                          '&lt;script type="text/javascript"&gt;'],
             rightAnswer: 3             
-        }    
-    ];
+        },
+        {
+            button: '<button id="calculate">Проверить результат</button>'
+        }
+    ];  
 
-    console.log(mainObj);
     
-    localStorage.setItem('mainObj', JSON.stringify(mainObj));
-    console.log('stringify - ', mainObj);
-    var mainObj = localStorage.getItem('mainObj');
-    console.log('stringify - ', mainObj);
-    var mainObj = JSON.parse(mainObj);
-    console.log(mainObj);
     
-    var html = $('#parsed-resig').html();
+    localStorage.setItem('mainObj', JSON.stringify(mainObj));    
+    mainObj = localStorage.getItem('mainObj');
+    mainObj = JSON.parse(mainObj);       
     
-    var $body = $('body');    
+    var $body = $('body');
+    var content = tmpl(html, {
+        data: mainObj}
+        );
 
-    var content = tmpl(html, {data: mainObj});
-    $body.append(content);
+    $body.append(content);     
     
-    
-
- 
+    var takeInputs = function (){
+        var inputs = document.querySelectorAll('.cbGroup1');
+        for (var i = 0; i < inputs.length; i++) {            
+        inputs[i].onchange = function() {
+            for (var i = 0; i < inputs.length; i++) {
+                inputs[i].checked = false;
+                this.checked = true;
+                }
+            }
+        };    
+    };
+    takeInputs();  
 });
+
+
+
+
 
 
 
