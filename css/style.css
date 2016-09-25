@@ -28,6 +28,7 @@ li {
     margin: 5px 0 0 50px;
 }
 .calculate {
+	display: block;
 	width: 200px;
 	margin: 20px auto;
 	text-align: center;	
@@ -35,6 +36,7 @@ li {
 	padding: 10px;
 	border: 1px solid #000;
 	cursor: pointer;
+	text-transform: uppercase;
 }
 .modal {
 	background: #ccc;
